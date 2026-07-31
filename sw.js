@@ -1,12 +1,12 @@
 const CACHE_NAME = "todos-v1";
 
 const FILES_TO_CACHE = [
-  "/todo-pwa/",
-  "/todo-pwa/index.html",
-  "/todo-pwa/style.css",
-  "/todo-pwa/app.js",
-  "/todo-pwa/manifest.json",
-  "/todo-pwa/icon.png"
+  "/",
+  "/index.html",
+  "/style.css",
+  "/app.js",
+  "/manifest.json",
+  "/icon.png"
 ];
 
 self.addEventListener("install", (event) => {

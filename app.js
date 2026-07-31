@@ -6,9 +6,60 @@ const themeToggle = document.getElementById("theme-toggle");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const currentDate = document.getElementById("current-date");
 
-let todos = [];
-let currentFilter = "all";      
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+let currentFilter = "all";
 
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (!text) return;
+  todos.push({ id: Date.now(), text, done: false });
+  todoInput.value = "";
+  saveTodos();
+  renderTodos();
+}
+
+addBtn.addEventListener("click", addTodo);
+
+todoInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTodo();
+});
+
+todoList.addEventListener("click", (e) => {
+  const li = e.target.closest(".todo-item");
+  if (!li) return;
+  const id = Number(li.dataset.id);
+
+  if (e.target.matches("input[type='checkbox']")) {
+    todos = todos.map(t => t.id === id ? { ...t, done: !t.done } : t);
+    saveTodos();
+    renderTodos();
+  }
+
+  if (e.target.closest(".delete-btn")) {
+    todos = todos.filter(t => t.id !== id);
+    saveTodos();
+    renderTodos();
+  }
+});
+
+document.getElementById("clear-completed").addEventListener("click", () => {
+  todos = todos.filter(t => !t.done);
+  saveTodos();
+  renderTodos();
+});
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderTodos();
+  });
+});
 
 themeToggle.addEventListener("click", () => {
   const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -59,3 +110,9 @@ function renderTodos() {
   const remainingTasks = todos.filter(todo => todo.done === false).length;
   taskCount.textContent = `${remainingTasks} tasks remaining`;
 }
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+
+renderTodos();

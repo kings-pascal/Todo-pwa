@@ -295,3 +295,31 @@ header {
   display: block;
   margin-bottom: 12px;
 }
+
+/* ── MOBILE ──────────────────────────────── */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 14px;
+  }
+
+  .header-left h1 {
+    font-size: 24px;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
+
+  .input-section button {
+    width: 100%;
+  }
+
+  .todo-item span {
+    font-size: 14px;
+  }
+
+  .filter-btn {
+    font-size: 13px;
+    padding: 8px 4px;
+  }
+}
