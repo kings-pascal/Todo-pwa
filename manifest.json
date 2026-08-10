@@ -1,7 +1,7 @@
 {
-  "name": "My Todos",
-  "short_name": "Todos",
-  "description": "A simple todo PWA app",
+  "name": "Dayflow",
+  "short_name": "Dayflow",
+  "description": "Plan your day, week and month with Dayflow",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

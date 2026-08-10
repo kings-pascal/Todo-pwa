@@ -3,44 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Todos</title>
+  <title>Dayflow</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="container">
+  <!-- ANIMATED BACKGROUND -->
+  <div class="bg-gradient"></div>
 
-    <header>
-      <div class="header-left">
-        <h1>My Todos</h1>
-        <p class="date" id="current-date"></p>
+  <!-- PAGE: HOME -->
+  <div class="page active" id="page-home">
+    <header class="main-header">
+      <div>
+        <p class="greeting" id="greeting"></p>
+        <p class="app-name">Dayflow</p>
+        <p class="home-date" id="home-date"></p>
       </div>
-      <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="theme-btn" id="theme-toggle">🌙</button>
     </header>
 
-    <div class="input-card">
-      <section class="input-section">
-        <input type="text" id="todo-input" placeholder="What needs to be done?" autocomplete="off" />
-        <button id="add-btn">Add</button>
-      </section>
+    <div class="cards-grid">
+
+      <div class="glass-card card-day" data-period="day">
+        <div class="card-top">
+          <div>
+            <p class="card-period-label">Today</p>
+            <p class="card-stats" id="day-stats">0 tasks</p>
+          </div>
+          <span class="card-emoji">☀️</span>
+        </div>
+        <div class="card-bar-track">
+          <div class="card-bar-fill" id="day-bar"></div>
+        </div>
+        <div class="card-bottom">
+          <span id="day-bar-label">0h 0m of 24h</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="glass-card card-week" data-period="week">
+        <div class="card-top">
+          <div>
+            <p class="card-period-label">This Week</p>
+            <p class="card-stats" id="week-stats">0 tasks</p>
+          </div>
+          <span class="card-emoji">📅</span>
+        </div>
+        <div class="card-bar-track">
+          <div class="card-bar-fill" id="week-bar"></div>
+        </div>
+        <div class="card-bottom">
+          <span id="week-bar-label">0 of 7 days</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="glass-card card-month" data-period="month">
+        <div class="card-top">
+          <div>
+            <p class="card-period-label">This Month</p>
+            <p class="card-stats" id="month-stats">0 tasks</p>
+          </div>
+          <span class="card-emoji">🗓️</span>
+        </div>
+        <div class="card-bar-track">
+          <div class="card-bar-fill" id="month-bar"></div>
+        </div>
+        <div class="card-bottom">
+          <span id="month-bar-label">0 of 31 days</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
     </div>
-
-    <div class="stats-row">
-      <span id="task-count">0 tasks remaining</span>
-      <button id="clear-completed">Clear completed</button>
-    </div>
-
-    <ul id="todo-list"></ul>
-
-    <section class="filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="active">Active</button>
-      <button class="filter-btn" data-filter="completed">Completed</button>
-    </section>
-
   </div>
+
+  <!-- PAGE: DAY -->
+  <div class="page" id="page-day">
+    <header class="inner-header">
+      <button class="back-btn" data-back="home">&#8592;</button>
+      <div class="inner-header-text">
+        <h2 class="inner-title">Today</h2>
+        <p class="inner-sub" id="day-page-date"></p>
+      </div>
+      <button class="theme-btn" id="theme-toggle-day">🌙</button>
+    </header>
+
+    <div class="progress-glass" id="day-progress-card">
+      <div class="progress-row">
+        <span class="progress-used" id="day-used">0h 0m planned</span>
+        <span class="progress-max">of 24h</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill fill-day" id="day-fill"></div>
+      </div>
+      <p class="progress-pct" id="day-pct">0% of your day planned</p>
+    </div>
+
+    <div class="input-glass">
+      <input type="text" class="task-text-input" id="day-task-input" placeholder="What do you want to do today?" autocomplete="off" />
+      <div class="time-row">
+        <div class="time-box">
+          <input type="number" id="day-hours" min="0" max="23" placeholder="0" />
+          <span>hrs</span>
+        </div>
+        <div class="time-box">
+          <input type="number" id="day-minutes" min="0" max="59" placeholder="0" />
+          <span>min</span>
+        </div>
+        <button class="add-btn btn-day" id="day-add-btn">+ Add</button>
+      </div>
+    </div>
+
+    <ul class="task-list" id="day-list"></ul>
+  </div>
+
+  <!-- PAGE: WEEK -->
+  <div class="page" id="page-week">
+    <header class="inner-header">
+      <button class="back-btn" data-back="home">&#8592;</button>
+      <div class="inner-header-text">
+        <h2 class="inner-title">This Week</h2>
+        <p class="inner-sub" id="week-page-date"></p>
+      </div>
+      <button class="theme-btn" id="theme-toggle-week">🌙</button>
+    </header>
+
+    <div class="progress-glass">
+      <div class="progress-row">
+        <span class="progress-used" id="week-used">0 days planned</span>
+        <span class="progress-max">of 7 days</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill fill-week" id="week-fill"></div>
+      </div>
+      <p class="progress-pct" id="week-pct">0% of your week planned</p>
+    </div>
+
+    <div class="input-glass">
+      <input type="text" class="task-text-input" id="week-task-input" placeholder="What do you want to achieve this week?" autocomplete="off" />
+      <div class="time-row">
+        <div class="time-box time-box-wide">
+          <input type="number" id="week-days" min="1" max="7" placeholder="1" />
+          <span>days this week</span>
+        </div>
+        <button class="add-btn btn-week" id="week-add-btn">+ Add</button>
+      </div>
+    </div>
+
+    <ul class="task-list" id="week-list"></ul>
+  </div>
+
+  <!-- PAGE: MONTH -->
+  <div class="page" id="page-month">
+    <header class="inner-header">
+      <button class="back-btn" data-back="home">&#8592;</button>
+      <div class="inner-header-text">
+        <h2 class="inner-title">This Month</h2>
+        <p class="inner-sub" id="month-page-date"></p>
+      </div>
+      <button class="theme-btn" id="theme-toggle-month">🌙</button>
+    </header>
+
+    <div class="progress-glass">
+      <div class="progress-row">
+        <span class="progress-used" id="month-used">0 days planned</span>
+        <span class="progress-max" id="month-max-label">of 31 days</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill fill-month" id="month-fill"></div>
+      </div>
+      <p class="progress-pct" id="month-pct">0% of your month planned</p>
+    </div>
+
+    <div class="input-glass">
+      <input type="text" class="task-text-input" id="month-task-input" placeholder="What do you want to achieve this month?" autocomplete="off" />
+      <div class="time-row">
+        <div class="time-box time-box-wide">
+          <input type="number" id="month-days" min="1" max="31" placeholder="1" />
+          <span id="month-days-label">days this month</span>
+        </div>
+        <button class="add-btn btn-month" id="month-add-btn">+ Add</button>
+      </div>
+    </div>
+
+    <ul class="task-list" id="month-list"></ul>
+  </div>
+
+  <!-- PAGE: HISTORY -->
+  <div class="page" id="page-history">
+    <header class="inner-header">
+      <button class="back-btn" data-back="home">&#8592;</button>
+      <div class="inner-header-text">
+        <h2 class="inner-title">History</h2>
+        <p class="inner-sub">Your completed tasks</p>
+      </div>
+      <button class="theme-btn" id="theme-toggle-history">🌙</button>
+    </header>
+    <div id="history-list"></div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-nav="home">
+      <span>🏠</span>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" data-nav="history">
+      <span>📋</span>
+      <span>History</span>
+    </button>
+  </nav>
 
   <script src="app.js"></script>
 </body>
