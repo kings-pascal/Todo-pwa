@@ -99,7 +99,7 @@ function cascadeToDay() {
     const alreadyInDay = data.day.some(d => d.cascadeId === task.id && d.cascadeDate === TODAY);
     if (!alreadyInDay && task.daysCompleted < task.daysTarget) {
       data.day.push({
-        id:          Date.now() + Math.random(),
+        id:          Math.floor(Date.now() + Math.random() * 1000),
         text:        task.text,
         hours:       0,
         minutes:     0,
@@ -118,7 +118,7 @@ function cascadeToDay() {
     const alreadyInWeek = data.week.some(w => w.cascadeId === task.id);
     if (!alreadyInWeek && task.daysCompleted < task.daysTarget) {
       data.week.push({
-        id:           Date.now() + Math.random(),
+        id:           Math.floor(Date.now() + Math.random() * 1000),
         text:         task.text,
         daysTarget:   Math.min(task.daysTarget - task.daysCompleted, 7),
         daysCompleted: 0,

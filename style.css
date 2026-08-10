@@ -25,10 +25,10 @@
   --text: #e8e8f5;
   --subtext: #aaa;
   --card-bg: rgba(255,255,255,0.08);
-  --glass-bg: rgba(255,255,255,0.06);
-  --glass-border: rgba(255,255,255,0.12);
-  --border: rgba(255,255,255,0.1);
-  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --shadow: 0 8px 32px rgba(0,0,0,0.6);
 }
 
 /* ── RESET ───────────────────────────────── */
@@ -48,13 +48,13 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a4e, #0f3460, #16213e);
+  background: linear-gradient(-45deg, #050510, #0d0b1e, #0a0a1a, #060612, #0b0920, #080816);
   background-size: 400% 400%;
   animation: gradientShift 12s ease infinite;
 }
 
 [data-theme="light"] .bg-gradient {
-  background: linear-gradient(-45deg, #e8e0ff, #d4e8ff, #e0f7f4, #f0e8ff, #ddeeff, #e8f5e9);
+  background: linear-gradient(-45deg, #ddd6fe, #bfdbfe, #a7f3d0, #ede9fe, #dbeafe, #d1fae5);
   background-size: 400% 400%;
   animation: gradientShift 12s ease infinite;
 }
